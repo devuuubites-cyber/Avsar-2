@@ -2,6 +2,22 @@
 const nav = document.getElementById('nav');
 addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40));
 
+/* ===== day / night theme ===== */
+const themeBtn = document.getElementById('themeToggle');
+const dropCaption = document.getElementById('dropCaption');
+let isDay = localStorage.getItem('theme') === 'day';
+function applyTheme() {
+  document.body.classList.toggle('day', isDay);
+  dropCaption.textContent = isDay ? 'want to switch to night mode?' : 'want to switch to day mode?';
+  if (window.recolorScenes) window.recolorScenes(isDay);
+}
+applyTheme();
+themeBtn.addEventListener('click', () => {
+  isDay = !isDay;
+  localStorage.setItem('theme', isDay ? 'day' : 'night');
+  applyTheme();
+});
+
 /* ===== scroll reveal ===== */
 const revealEls = document.querySelectorAll(
   '.step,.feature-card,.uc-card,.sc-card,.min-card,.band-head,.quote-inner,.showcase-head'
@@ -106,6 +122,17 @@ if (window.THREE) {
       field.rotation.y += 0.0005;
     };
   });
+
+  window.recolorScenes = day => {
+    scenes.forEach(c => {
+      if (c.scene.fog) c.scene.fog.color.set(day ? 0xeef1fb : (c.scene === scenes[2]?.scene ? 0x06121f : 0x080611));
+      c.scene.traverse(o => {
+        if (o.isPoints) o.material.opacity = day ? 0.45 : 0.85;
+        if (o.isMesh && o.material.wireframe) o.material.opacity = day ? 0.28 : (o.material.color.getHex() === 0xff5fa6 ? 0.7 : 0.5);
+      });
+    });
+  };
+  window.recolorScenes(document.body.classList.contains('day'));
 
   (function loop() {
     requestAnimationFrame(loop);
