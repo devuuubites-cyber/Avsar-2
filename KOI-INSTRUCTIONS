@@ -1,0 +1,349 @@
+The hero section revolves entirely around the koi fish.
+
+The koi is NOT:
+- a decorative asset
+- a floating background object
+- a looping idle model
+- a “3D element”
+
+The koi is the soul of the experience.
+
+It should feel:
+- alive
+- intelligent
+- graceful
+- cinematic
+- mysterious
+- physically present
+- emotionally atmospheric
+
+The fish must command visual attention naturally WITHOUT screaming for attention.
+
+====================================================
+CORE HERO PHILOSOPHY
+====================================================
+
+The first thing users should feel is:
+
+“There’s something alive in this environment.”
+
+The koi should emerge slowly from darkness/fog/light rays rather than instantly appearing fully visible.
+
+The hero experience should feel like:
+- discovering a mythical cybernetic ocean creature
+- underwater cinematic encounter
+- high-end interactive digital art piece
+
+====================================================
+TECHNICAL STACK
+====================================================
+
+Use:
+- React Three Fiber
+- Drei
+- GSAP
+- Framer Motion
+- Three.js
+- GLSL shaders where necessary
+
+DO NOT use:
+- primitive keyframe animations only
+- robotic rotation loops
+- constant circular motion
+- generic floating animation presets
+
+====================================================
+HERO COMPOSITION
+====================================================
+
+The koi must remain the dominant focal point of the hero section.
+
+Composition rules:
+- fish positioned slightly off-center
+- cinematic asymmetry
+- large negative space around fish
+- fish occupies depth space, not flat screen space
+- environment frames the koi
+
+The camera should compose the koi like a film shot.
+
+The fish should occasionally:
+- drift closer to camera
+- pass partially outside frame
+- rotate elegantly
+- disappear partially into volumetric fog
+
+Avoid keeping the fish perfectly centered permanently.
+
+====================================================
+MOVEMENT SYSTEM
+====================================================
+
+This is the MOST IMPORTANT part.
+
+The movement MUST feel biologically believable.
+
+The koi should swim with:
+- inertia
+- drag
+- acceleration
+- deceleration
+- curved motion paths
+- subtle unpredictability
+
+The motion should NEVER:
+- loop obviously
+- repeat visibly
+- feel mathematically robotic
+
+====================================================
+BODY ANIMATION
+====================================================
+
+Animate the entire body chain.
+
+The fish motion should propagate:
+head → spine → tail
+
+Implement:
+- sine-wave spine deformation
+- delayed tail follow-through
+- soft secondary motion
+- subtle fin movement
+- slight body twisting
+
+The tail should lag behind directional changes naturally.
+
+Movement references:
+- real koi swimming underwater
+- slow cinematic underwater footage
+- graceful whale-like drifting
+
+====================================================
+SWIMMING LOGIC
+====================================================
+
+Create procedural roaming behavior.
+
+The fish should:
+- wander naturally
+- choose new paths occasionally
+- arc around invisible points
+- react subtly to cursor proximity
+- avoid sudden directional snaps
+
+The fish should:
+- sometimes slow almost to stillness
+- sometimes accelerate gently
+- sometimes glide through the camera frame
+
+DO NOT:
+- make it constantly active
+- make it hyper energetic
+
+The motion pacing should feel meditative.
+
+====================================================
+CURSOR INTERACTION
+====================================================
+
+Cursor interaction must be subtle and premium.
+
+The koi should:
+- slightly acknowledge cursor presence
+- gently rotate toward cursor
+- shift trajectory softly
+- never aggressively chase the cursor
+
+Think:
+curiosity, not game AI.
+
+The response should be:
+- dampened
+- delayed
+- elegant
+
+====================================================
+SCROLL INTERACTION
+====================================================
+
+The fish should react to scroll progression.
+
+Examples:
+- camera slowly follows fish
+- fish dives deeper while scrolling
+- fish ascends through fog
+- fish passes through light shafts
+- fish approaches text reveals
+
+The fish must feel connected to page progression.
+
+====================================================
+ENTRANCE SEQUENCE
+====================================================
+
+On initial load:
+
+DO NOT instantly reveal the fish.
+
+Instead:
+1. dark underwater atmosphere
+2. faint particles
+3. subtle god rays
+4. distant silhouette
+5. slow emergence
+6. emissive highlights reveal scales gradually
+
+The reveal should feel cinematic.
+
+====================================================
+SHADER & MATERIAL QUALITY
+====================================================
+
+The koi material MUST feel premium.
+
+Implement:
+- reflective wet surface
+- subtle emissive accents
+- soft iridescence
+- realistic specular response
+- subtle translucency in fins
+
+Possible enhancements:
+- fresnel rim lighting
+- animated caustic projections
+- soft bloom highlights
+- depth-based lighting
+
+Avoid:
+- plastic appearance
+- flat PBR defaults
+- over-glowing neon fish
+- cartoon rendering
+
+====================================================
+LIGHTING
+====================================================
+
+Lighting should sculpt the koi dramatically.
+
+Use:
+- soft rim lighting
+- underwater caustics
+- moving light rays
+- subtle bloom
+- volumetric-inspired depth
+
+The koi should periodically pass through:
+- brighter shafts of light
+- darker fog regions
+- silhouette moments
+
+This creates cinematic rhythm.
+
+====================================================
+CAMERA CHOREOGRAPHY
+====================================================
+
+The camera should NOT remain static.
+
+Use:
+- subtle drift
+- slow buoyant movement
+- eased interpolation
+- underwater float sensation
+
+The camera should:
+- frame the fish artistically
+- move with cinematic restraint
+- never spin wildly
+
+The fish and camera should feel connected.
+
+====================================================
+PARTICLES & ENVIRONMENT
+====================================================
+
+Around the koi include:
+- floating particles
+- suspended dust
+- tiny drifting bubbles
+- volumetric fog layers
+- soft depth haze
+
+Particles should react subtly to fish movement.
+
+The koi should feel embedded in water, not floating in empty space.
+
+====================================================
+ATMOSPHERE
+====================================================
+
+The emotional tone should be:
+- calm
+- mysterious
+- immersive
+- majestic
+- slightly haunting
+
+NOT:
+- playful
+- cartoonish
+- gaming-style flashy
+- overly cyberpunk
+
+====================================================
+PERFORMANCE REQUIREMENTS
+====================================================
+
+Optimize carefully.
+
+Use:
+- adaptive DPR
+- optimized render loops
+- efficient animation calculations
+- instanced particles
+- compressed textures
+
+Maintain smooth FPS.
+
+Avoid:
+- excessive postprocessing
+- expensive real-time shadows everywhere
+- overkill shader complexity
+
+====================================================
+IMPORTANT ANTI-SLOP RULES
+====================================================
+
+DO NOT produce:
+- generic “floating object” animation
+- copy-pasted R3F examples
+- default Drei orbit feeling
+- fake cinematic effects
+- exaggerated bloom spam
+- oversaturated neon visuals
+- robotic loops
+
+Everything must feel:
+intentional, restrained, elegant, cinematic.
+
+====================================================
+FINAL GOAL
+====================================================
+
+Users should immediately feel:
+
+“This fish feels alive.”
+
+The koi should become:
+- the identity of the website
+- the emotional anchor
+- the cinematic centerpiece
+- the memory users retain after leaving
+
+The final hero should feel closer to:
+interactive underwater cinema
+
+than:
+a normal React website with a fish model.
