@@ -38,8 +38,22 @@ unzip -q "$SRC/Ocean_Floor_Scene.usdz"
 "$PY" "$ROOT/scripts/usd_to_glb.py" -- scene.usdc "$OUT/ocean_floor.glb"
 cd ..
 
+echo "==> underwater terrain (nested-zip .fbx -> .glb)"
+mkdir terrain && cd terrain
+unzip -q "$SRC/underwater-terrain.zip"
+unzip -q source/model.zip -d source
+"$PY" "$ROOT/scripts/fbx_to_glb.py" -- source/model.fbx "$OUT/underwater_terrain.glb" textures
+cd ..
+
+echo "==> octopus garden (nested-zip .obj+.mtl -> .glb)"
+mkdir octopus && cd octopus
+unzip -q "$SRC/octopus-garden.zip"
+unzip -q source/model.zip -d source
+"$PY" "$ROOT/scripts/obj_to_glb.py" -- source/model.obj "$OUT/octopus_garden.glb"
+cd ..
+
 echo "==> verify"
-for f in guppy.glb koi.glb jellyfish.glb ocean_floor.glb; do
+for f in guppy.glb koi.glb jellyfish.glb ocean_floor.glb underwater_terrain.glb octopus_garden.glb; do
   if [ ! -f "$OUT/$f" ]; then
     echo "MISSING: $f"; exit 1
   fi

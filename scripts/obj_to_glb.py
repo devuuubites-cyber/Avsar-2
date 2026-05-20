@@ -7,7 +7,9 @@ Usage:
 import sys
 import os
 import glob
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import bpy
+from _glb_export import export_glb
 
 argv = sys.argv
 if "--" not in argv:
@@ -32,6 +34,23 @@ def find_tex(*keywords):
         if all(k.lower() in name for k in keywords):
             return f
     return None
+
+def materials_have_image_textures():
+    for o in bpy.context.scene.objects:
+        if o.type != "MESH" or not o.data.materials:
+            continue
+        for m in o.data.materials:
+            if not (m and m.use_nodes):
+                continue
+            for n in m.node_tree.nodes:
+                if n.type == "TEX_IMAGE" and n.image:
+                    return True
+    return False
+
+if materials_have_image_textures():
+    print("[mtl] textures already bound via .mtl; skipping rebuild")
+    export_glb(out_path)
+    sys.exit(0)
 
 base_color = find_tex("basecolor") or find_tex("base", "color") or find_tex("diffuse")
 normal     = find_tex("normal")
@@ -89,16 +108,4 @@ for o in bpy.context.scene.objects:
         o.data.materials.clear()
         o.data.materials.append(mat)
 
-try:
-    bpy.ops.file.pack_all()
-except Exception as e:
-    print(f"[pack_all] warning: {e}")
-
-bpy.ops.export_scene.gltf(
-    filepath=out_path,
-    export_format="GLB",
-    export_apply=True,
-    export_yup=True,
-    export_image_format="AUTO",
-)
-print(f"[done] wrote {out_path}")
+export_glb(out_path)

@@ -5,7 +5,9 @@ Usage:
 """
 import sys
 import os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import bpy
+from _glb_export import export_glb
 
 argv = sys.argv
 if "--" not in argv:
@@ -43,16 +45,4 @@ for img in bpy.data.images:
             print(f"[remap] {img.name} -> {cand}")
             break
 
-try:
-    bpy.ops.file.pack_all()
-except Exception as e:
-    print(f"[pack_all] warning: {e}")
-
-bpy.ops.export_scene.gltf(
-    filepath=out_path,
-    export_format="GLB",
-    export_apply=True,
-    export_yup=True,
-    export_image_format="AUTO",
-)
-print(f"[done] wrote {out_path}")
+export_glb(out_path)
