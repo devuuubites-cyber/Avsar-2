@@ -1,0 +1,370 @@
+The jellyfish should NOT exist as another “cool animated creature”.
+
+It must serve a completely different emotional and cinematic purpose from the koi and guppies.
+
+====================================================
+ROLE OF THE JELLYFISH
+
+The koi =
+the conscious protagonist.
+
+The guppies =
+the orchestrated formation language.
+
+The jellyfish =
+the dreamlike atmospheric intelligence of the ocean itself.
+
+The jellyfish should feel:
+
+* ancient
+* ethereal
+* hypnotic
+* ghostlike
+* bioluminescent
+* slow beyond human pacing
+
+It should NOT compete with the koi for dominance.
+
+Instead:
+the jellyfish acts like environmental poetry.
+
+====================================================
+WHERE THE JELLYFISH SHOULD APPEAR
+
+DO NOT place the jellyfish in the first hero lock sequence.
+
+That would:
+
+* overcrowd composition
+* weaken the koi focus
+* reduce cinematic clarity
+
+Instead:
+
+The jellyfish should emerge AFTER the koi + guppy formation sequence begins dissolving.
+
+Ideal timing:
+the transition between hero section and deeper immersive content.
+
+Think:
+the audience descends deeper into the ocean world,
+and now encounters stranger lifeforms.
+
+====================================================
+SCENE TRANSITION ROLE
+
+The jellyfish should become:
+the transition bridge between sections.
+
+It should guide the viewer deeper into the environment.
+
+Sequence flow:
+
+1. Hero koi dominates
+2. Guppy formation assembles
+3. Formation dissolves
+4. Environment darkens/deepens
+5. Jellyfish glow emerges from fog
+6. Camera drifts downward/forward
+7. Jellyfish slowly passes through frame
+8. New section content reveals
+
+The jellyfish is basically:
+a cinematic transition organism.
+
+====================================================
+MOTION PHILOSOPHY
+
+The jellyfish should move at a COMPLETELY different rhythm from the koi.
+
+Koi:
+
+* elegant
+* intelligent
+* directional
+
+Jellyfish:
+
+* drifting
+* pulsing
+* suspended
+* almost cosmic
+
+The jellyfish should feel:
+untethered from gravity and time.
+
+====================================================
+PRIMARY MOVEMENT SYSTEM
+
+Movement must feel:
+
+* buoyant
+* fluid
+* dreamlike
+* underwater
+* nearly zero-gravity
+
+Implement:
+
+* slow vertical drifting
+* subtle directional wandering
+* soft rotational drifting
+* pulse-propelled motion
+
+The jellyfish should NEVER:
+
+* dart quickly
+* react sharply
+* behave like an animal AI
+
+====================================================
+PULSE ANIMATION
+
+MOST IMPORTANT PART.
+
+The jellyfish locomotion comes from pulse contractions.
+
+Animation cycle:
+
+1. bell expands softly
+2. bell contracts slowly
+3. body gently pushes forward/upward
+4. tentacles lag behind
+5. momentum continues after pulse
+
+The pulse timing should feel:
+
+* meditative
+* hypnotic
+* elegant
+
+NOT:
+
+* rhythmic like a game loop
+* repetitive
+* robotic
+
+====================================================
+TENTACLE BEHAVIOR
+
+Tentacles are critical for realism.
+
+Each tentacle should:
+
+* drift independently
+* react with delayed motion
+* sway from body momentum
+* float continuously
+
+Use:
+
+* soft procedural secondary motion
+* spline simulation
+* verlet chain logic if needed
+
+The tentacles should feel:
+almost weightless.
+
+====================================================
+COMPOSITION RULES
+
+The jellyfish should rarely sit center-frame.
+
+Preferred framing:
+
+* partially off-screen
+* emerging from darkness
+* drifting across foreground
+* crossing depth planes
+* entering/exiting slowly
+
+The audience should feel:
+they are witnessing a passing creature,
+not viewing a showcase model.
+
+====================================================
+DEPTH USAGE
+
+CRITICAL.
+
+The jellyfish works best as:
+a depth-layering device.
+
+Use multiple jellyfish at:
+
+* foreground blur
+* midground glow
+* distant silhouettes
+
+Some jellyfish should:
+barely be visible through fog.
+
+The scene should feel:
+endless and dimensional.
+
+====================================================
+LIGHTING & MATERIALS
+
+The jellyfish should become:
+the primary source of bioluminescent lighting.
+
+Material qualities:
+
+* translucent bell
+* soft internal glow
+* subtle scattering
+* delicate emissive gradients
+* thin rim highlights
+
+Avoid:
+
+* opaque surfaces
+* hard plastic look
+* over-neon cyberpunk style
+
+====================================================
+GLOW BEHAVIOR
+
+Glow intensity should:
+breathe with pulse animation.
+
+During contraction:
+
+* internal light intensifies slightly
+
+During expansion:
+
+* glow softens
+
+This creates:
+organic life-like illumination.
+
+====================================================
+ENVIRONMENTAL INTERACTION
+
+The jellyfish should subtly affect the surrounding atmosphere.
+
+As it moves:
+
+* nearby fog softly illuminates
+* particles catch glow
+* bloom halos appear gently
+* light shafts become visible briefly
+
+The creature should feel:
+embedded into the water volume itself.
+
+====================================================
+SCROLL CHOREOGRAPHY
+
+The jellyfish should NOT obey scroll aggressively.
+
+Instead:
+scroll gently influences:
+
+* depth movement
+* camera drift
+* reveal timing
+* environmental density
+
+The jellyfish should appear:
+independent from the user,
+as though it already existed in the world.
+
+====================================================
+CAMERA RELATIONSHIP
+
+The camera should behave:
+curious but restrained.
+
+Possible cinematic moments:
+
+* jellyfish slowly passes near lens
+* camera drifts beneath tentacles
+* foreground jellyfish obscures view briefly
+* glow silhouettes the environment
+
+Think:
+cinematic underwater documentary.
+
+====================================================
+TRANSITION PURPOSE
+
+The jellyfish transitions the experience from:
+structured choreography
+→
+dreamlike immersion.
+
+Koi/guppies:
+precision and formation.
+
+Jellyfish:
+weightlessness and atmosphere.
+
+====================================================
+AUDIO VISUAL FEELING
+
+Even silently,
+the animation should FEEL like:
+deep ambient sound design.
+
+The movement pacing should suggest:
+
+* distant echoes
+* underwater pressure
+* slowed perception
+* floating consciousness
+
+====================================================
+PERFORMANCE STRATEGY
+
+Use:
+
+* instanced jellyfish where possible
+* shared shader materials
+* lightweight tentacle simulations
+* optimized translucency
+* reduced overdraw
+
+Avoid:
+
+* expensive real volumetrics everywhere
+* high subdivision meshes
+* excessive transparency stacking
+
+====================================================
+ANTI-SLOP RULES
+
+DO NOT:
+
+* place jellyfish randomly
+* make them decorative wallpaper
+* use game-like floating loops
+* overuse neon
+* animate them too fast
+* turn them into hero elements
+
+The jellyfish are:
+environmental spirits,
+not mascots.
+
+====================================================
+FINAL EMOTIONAL GOAL
+
+The audience should feel:
+
+“The deeper I scroll, the stranger and more alive this ocean becomes.”
+
+The jellyfish sequence should create:
+
+* wonder
+* calm unease
+* dreamlike immersion
+* emotional depth
+* cinematic transition energy
+
+The jellyfish should feel less like:
+3D assets
+
+and more like:
+living light drifting through an infinite abyss.
