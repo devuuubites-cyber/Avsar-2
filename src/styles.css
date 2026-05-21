@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  background: #04060c;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* Scroll surface — virtual height drives Lenis + scene progress. */
+.scroll-surface {
+  height: 600vh;
+  width: 100%;
+  pointer-events: none;
+}
+
+.canvas-fixed {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+}
