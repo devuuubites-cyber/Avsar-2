@@ -8,27 +8,33 @@ import { sharedRefs } from "../rigs/sharedRefs";
 const KOI_URL = "/models/koi.glb";
 
 const tmpTarget = new THREE.Vector3();
-const tmpForward = new THREE.Vector3();
-const tmpQuat = new THREE.Quaternion();
-const tmpEuler = new THREE.Euler();
-const tmpLookMatrix = new THREE.Matrix4();
-const tmpUp = new THREE.Vector3(0, 1, 0);
+
+function angleLerp(current: number, target: number, alpha: number): number {
+  let diff = target - current;
+  while (diff > Math.PI) diff -= Math.PI * 2;
+  while (diff < -Math.PI) diff += Math.PI * 2;
+  return current + diff * alpha;
+}
 
 /**
- * Generates a non-repeating wander target by stacking incommensurate
- * low-frequency sines on each axis. The fish chases this softly via a
- * critically-damped spring; lateral velocity drives the body's `uTurn`
- * so the spine bends into the corner.
+ * Hero koi. Procedural wander on three incommensurate sines per axis;
+ * critically-damped spring chase; soft speed cap. Heading is a simple
+ * yaw lerp (rotation.y from atan2 of velocity); pitch lerps from
+ * normalized vertical velocity so dives read as nose-down. The fish is
+ * gated above water (y > 0.18) so it hovers and dips like the peachweb
+ * reference.
+ *
+ * The body shader (patchKoiMaterial) handles spine sine deformation,
+ * lateral turn-bend, fresnel rim, and the entrance fade gate.
  */
 export function Koi() {
   const gltf = useGLTF(KOI_URL);
   const groupRef = useRef<THREE.Group>(null!);
   const velRef = useRef(new THREE.Vector3());
-  const headingRef = useRef(new THREE.Quaternion());
+  const yawRef = useRef(0);
+  const pitchRef = useRef(0);
   const uniformsRef = useRef<KoiUniforms | null>(null);
-  const materialRef = useRef<THREE.MeshStandardMaterial | null>(null);
 
-  // Clone so we never mutate the cached source mesh.
   const scene = useMemo(() => gltf.scene.clone(true), [gltf.scene]);
 
   useEffect(() => {
@@ -37,99 +43,106 @@ export function Koi() {
         const mesh = o as THREE.Mesh;
         const src = mesh.material as THREE.MeshStandardMaterial;
         const mat = src.clone();
-        materialRef.current = mat;
         uniformsRef.current = patchKoiMaterial(mat, { headX: 3.2, tailX: -3.1 });
+        // Shader is keyed to body-axis sweep; bump amplitudes for visible
+        // gesture and slow the cadence to graceful koi pacing.
+        uniformsRef.current.uSwimAmp.value = 1.0;
+        uniformsRef.current.uSwimFreq.value = 1.5;
+        uniformsRef.current.uRimColor.value.set("#ffd6e3");
+        uniformsRef.current.uRimPower.value = 2.2;
+        uniformsRef.current.uRimStrength.value = 1.1;
         mesh.material = mat;
         mesh.castShadow = false;
         mesh.receiveShadow = false;
       }
     });
+    if (groupRef.current) groupRef.current.rotation.order = "YXZ";
   }, [scene]);
 
   useFrame((state, dt) => {
     const g = groupRef.current;
     if (!g) return;
-
     const t = state.clock.elapsedTime;
 
-    // Procedural wander target — three incommensurate sines per axis so
-    // the orbit never repeats inside a viewing session.
-    const radius = 3.4;
+    // Cinematic wander target — small footprint so the fish stays in
+    // hero framing. Y kept above water with a slow dip toward surface.
+    const radius = 2.1;
+    const yBase = 0.7 + Math.sin(t * 0.17 + 1.7) * 0.35
+                + Math.sin(t * 0.041 + 0.5) * 0.18;
     tmpTarget.set(
-      Math.sin(t * 0.13) * radius + Math.sin(t * 0.041) * radius * 0.45,
-      0.25 + Math.sin(t * 0.17 + 1.7) * 0.55,
-      Math.cos(t * 0.11) * radius * 0.55 + Math.sin(t * 0.061 + 0.5) * 1.2,
+      Math.sin(t * 0.16) * radius + Math.sin(t * 0.043 + 1.1) * radius * 0.4,
+      Math.max(0.32, yBase),
+      Math.cos(t * 0.13) * radius * 0.45 + Math.sin(t * 0.07 + 0.5) * 0.6 - 0.3,
     );
 
-    // Pull a small amount toward the cursor intent — curiosity, not chase.
-    tmpTarget.lerp(sharedRefs.cursorIntent, 0.08);
+    // Subtle cursor curiosity bias.
+    tmpTarget.lerp(sharedRefs.cursorIntent, 0.06);
 
-    // Spring chase. Acceleration proportional to (target - position),
-    // damped by current velocity. Limits keep the koi from snapping.
-    const stiffness = 1.6;
-    const damping = 1.7;
+    // Spring chase, lightly damped.
+    const stiffness = 1.4;
+    const damping = 1.65;
     const ax = (tmpTarget.x - g.position.x) * stiffness - velRef.current.x * damping;
     const ay = (tmpTarget.y - g.position.y) * stiffness - velRef.current.y * damping;
     const az = (tmpTarget.z - g.position.z) * stiffness - velRef.current.z * damping;
     velRef.current.x += ax * dt;
     velRef.current.y += ay * dt;
     velRef.current.z += az * dt;
-    // Soft speed cap.
     const v = velRef.current.length();
-    const vMax = 2.2;
+    const vMax = 1.8;
     if (v > vMax) velRef.current.multiplyScalar(vMax / v);
 
     g.position.addScaledVector(velRef.current, dt);
-
-    // Heading: face direction of velocity, but dampened so the fish
-    // doesn't whip around at low speeds.
-    tmpForward.copy(velRef.current);
-    if (tmpForward.lengthSq() > 0.0008) {
-      tmpForward.normalize();
-      // Mesh's head points +X locally. We want head to align with velocity.
-      // Build a lookAt-style quat using +X as forward.
-      const fx = tmpForward.x;
-      const fy = tmpForward.y;
-      const fz = tmpForward.z;
-      tmpLookMatrix.lookAt(
-        new THREE.Vector3(0, 0, 0),
-        new THREE.Vector3(-fx, -fy, -fz),
-        tmpUp,
-      );
-      tmpQuat.setFromRotationMatrix(tmpLookMatrix);
-      // The matrix above orients -Z to forward; rotate so +X is forward.
-      const xToZ = new THREE.Quaternion().setFromAxisAngle(
-        new THREE.Vector3(0, 1, 0),
-        Math.PI / 2,
-      );
-      tmpQuat.multiply(xToZ);
-      headingRef.current.slerp(tmpQuat, Math.min(1, dt * 2.2));
-      g.quaternion.copy(headingRef.current);
+    // Hard floor — never submerge below the water plane.
+    if (g.position.y < 0.2) {
+      g.position.y = 0.2;
+      if (velRef.current.y < 0) velRef.current.y = 0;
     }
 
-    // Compute local-space lateral velocity to bend the spine.
-    tmpEuler.setFromQuaternion(g.quaternion, "YXZ");
-    const localLateral = velRef.current.x * Math.cos(tmpEuler.y) -
-                          velRef.current.z * Math.sin(tmpEuler.y);
+    // Heading: yaw lerps to velocity direction, pitch lerps to nose-down
+    // proportional to vertical descent. The koi body's local +X is the
+    // head, so yaw = atan2(-velZ, velX) under the standard convention.
+    const speedH = Math.hypot(velRef.current.x, velRef.current.z);
+    if (speedH > 0.02) {
+      const targetYaw = Math.atan2(-velRef.current.z, velRef.current.x);
+      yawRef.current = angleLerp(yawRef.current, targetYaw, Math.min(1, dt * 2.4));
+    }
+    if (v > 0.02) {
+      const targetPitch = Math.atan2(velRef.current.y, Math.max(0.01, speedH));
+      // Cinematic stylization: 0.5x of the literal pitch so the dive
+      // reads without the fish standing on its tail.
+      pitchRef.current += (targetPitch * -0.5 - pitchRef.current) * Math.min(1, dt * 2.0);
+    }
+    g.rotation.y = yawRef.current;
+    g.rotation.x = pitchRef.current;
 
-    // Entrance fade — starts black, reveals over ~3s after a short beat.
-    const startDelay = 0.5;
-    const fadeIn = 3.2;
+    // Local-frame lateral velocity drives the spine bend (uTurn).
+    const localLateral = velRef.current.x * Math.cos(yawRef.current) -
+                         velRef.current.z * Math.sin(yawRef.current);
+
+    // Entrance fade: a 0.6 s beat then ~3 s reveal.
+    const startDelay = 0.6;
+    const fadeIn = 3.0;
     const targetEntrance = Math.min(1, Math.max(0, (t - startDelay) / fadeIn));
-    sharedRefs.entrance += (targetEntrance - sharedRefs.entrance) * Math.min(1, dt * 1.6);
+    sharedRefs.entrance += (targetEntrance - sharedRefs.entrance)
+                          * Math.min(1, dt * 1.5);
 
-    // Push to shader.
     if (uniformsRef.current) {
       uniformsRef.current.uTime.value = t;
-      uniformsRef.current.uTurn.value = THREE.MathUtils.clamp(localLateral * 0.32, -0.9, 0.9);
+      uniformsRef.current.uTurn.value = THREE.MathUtils.clamp(localLateral * 0.5, -1.1, 1.1);
       uniformsRef.current.uEntrance.value = sharedRefs.entrance;
     }
 
-    // Publish position for camera + future phase choreography.
     sharedRefs.koiPosition.copy(g.position);
   });
 
-  return <primitive ref={groupRef} object={scene} position={[0.6, 0.2, 0]} />;
+  return (
+    <primitive
+      ref={groupRef}
+      object={scene}
+      position={[0.2, 0.55, 0]}
+      scale={0.34}
+    />
+  );
 }
 
 useGLTF.preload(KOI_URL);
