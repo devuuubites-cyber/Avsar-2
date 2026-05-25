@@ -1,0 +1,391 @@
+The guppy sequence is NOT a particle effect.
+
+It is a choreographed cinematic formation reveal inspired by the “fanned deck” motion language from the reference — except translated into living marine motion.
+
+The school of guppies should feel:
+
+* intelligent
+* synchronized
+* elegant
+* atmospheric
+* orchestrated
+* dimensional
+* cinematic
+
+The effect should feel like:
+a hidden underwater swarm assembling itself into formation around the koi.
+
+====================================================
+CORE VISUAL IDEA
+
+The guppies behave like a diagonal “living deck”.
+
+Imagine:
+
+* cards snapping into a staggered diagonal stack
+    BUT
+* expressed as living fish moving through volumetric depth.
+
+The formation should:
+
+* emerge from deep background space
+* travel along a shared diagonal vector
+* settle behind the koi
+* hold briefly
+* dissolve back into the abyss
+
+This is NOT:
+
+* random flocking
+* aquarium simulation
+* generic boids demo
+
+It is:
+precisely art-directed cinematic choreography.
+
+====================================================
+FORMATION DESIGN
+
+The school forms along a diagonal receding axis.
+
+Visual arrangement:
+foreground lower-left → background upper-right
+(or inverse depending on composition)
+
+Each guppy occupies:
+
+* slightly different depth
+* slightly different rotation
+* slightly different scale
+* slight spacing irregularity
+
+The formation should resemble:
+
+* layered silhouettes
+* stacked glass cards
+* receding perspective planes
+
+The school must visually frame the koi hero.
+
+====================================================
+ENTRANCE CHOREOGRAPHY
+
+MOST IMPORTANT SECTION.
+
+The guppies DO NOT spawn visibly.
+
+Each guppy should:
+
+1. begin deep in fog
+2. extremely small silhouette
+3. low opacity
+4. faint emissive edge
+5. travel rapidly but smoothly along diagonal vector
+6. decelerate elegantly into slot
+7. settle with slight overshoot drift
+
+The feeling should resemble:
+luxury UI cards snapping into place
+translated into living underwater creatures.
+
+====================================================
+TIMING SYSTEM
+
+Use staggered choreography.
+
+DO NOT animate all guppies simultaneously.
+
+Instead:
+
+* each fish enters with delayed offset
+* 60–140ms stagger range
+* cascading wave timing
+* rhythmic assembly feel
+
+The sequence should feel:
+
+* musical
+* orchestrated
+* satisfying
+
+NOT:
+
+* mechanical
+* mathematically uniform
+
+====================================================
+MOTION CHARACTER
+
+Movement style:
+
+* smooth spline interpolation
+* curved travel arcs
+* soft easing
+* underwater inertia
+* subtle drag
+
+Each guppy should:
+
+* tilt while accelerating
+* level while locking into formation
+* drift microscopically after arrival
+
+NO:
+
+* linear interpolation
+* robotic straight-line movement
+* instant stopping
+
+====================================================
+FORMATION LOCK-IN MOMENT
+
+After all guppies arrive:
+
+* formation stabilizes briefly
+* motion slows almost to stillness
+* koi slowly rotates toward camera
+* lighting intensifies subtly
+* bloom edges peak softly
+* headline text reveals
+
+This is the emotional “hero lock” moment.
+
+Hold duration:
+~1.5–2.5 seconds
+
+The audience should subconsciously think:
+“Everything aligned.”
+
+====================================================
+KOI RELATIONSHIP
+
+The guppies must reinforce the koi’s importance.
+
+The school should:
+
+* orbit compositionally around koi
+* point visual attention toward koi
+* enhance depth behind koi
+* never overpower koi visually
+
+The koi remains:
+the king of the frame.
+
+====================================================
+DEPTH & PARALLAX
+
+Critical.
+
+Every guppy must exist at different Z-depths.
+
+Implement:
+
+* layered depth offsets
+* subtle parallax
+* different fog intensities
+* varying blur softness
+* perspective scaling
+
+Foreground guppies:
+
+* larger
+* sharper
+* brighter rim light
+
+Background guppies:
+
+* faded
+* smaller
+* swallowed partially by haze
+
+This depth layering is ESSENTIAL.
+
+====================================================
+LIGHTING
+
+Each guppy should catch:
+
+* thin rim lighting
+* bloom streaks
+* reflective highlights
+* underwater caustic flickers
+
+Lighting behavior:
+
+* emissive edge pulses slightly during arrival
+* brightness settles after lock-in
+
+Avoid:
+
+* neon overload
+* glowing cartoon fish
+* equal brightness everywhere
+
+====================================================
+BLOOM TRAILS
+
+During fast arrival movement:
+
+* subtle bloom streak trails appear
+* very restrained
+* dissolve quickly
+
+Think:
+luxury motion graphics
+NOT:
+anime speed lines.
+
+The trails should:
+
+* enhance velocity perception
+* reinforce cinematic polish
+* disappear after formation settles
+
+====================================================
+FORMATION DRIFT
+
+Once assembled:
+the school should drift together microscopically.
+
+Like:
+a suspended underwater constellation.
+
+Implement:
+
+* collective slow sway
+* subtle oscillation
+* minute spacing shifts
+* synchronized breathing motion
+
+The school should feel alive even while stationary.
+
+====================================================
+DISSOLVE EXIT
+
+As scroll progresses:
+the formation should collapse elegantly.
+
+NOT:
+instant disappearance.
+
+Instead:
+
+* guppies peel away gradually
+* dissolve into fog depth
+* spacing increases
+* opacity fades
+* diagonal structure breaks apart
+
+Some guppies:
+
+* dive deeper
+* rotate away
+* vanish into darkness
+
+The koi remains longest before transitioning.
+
+====================================================
+CAMERA CHOREOGRAPHY
+
+During formation:
+
+* camera subtly dollies
+* slight lateral drift
+* gentle push-in
+* eased buoyancy motion
+
+The camera movement must:
+support the formation reveal,
+not distract from it.
+
+====================================================
+SCROLL SYNCHRONIZATION
+
+Entire sequence tied to scroll progress.
+
+Suggested structure:
+
+0.00–0.25
+ambient underwater calm
+
+0.25–0.45
+first guppies emerge
+
+0.45–0.70
+full staggered assembly
+
+0.70–0.82
+formation lock-in + headline reveal
+
+0.82–1.00
+formation dissolves into deep
+
+Use:
+GSAP timeline + Lenis scroll progress.
+
+====================================================
+TECHNICAL IMPLEMENTATION
+
+Recommended systems:
+
+* GuppyFormationSystem
+* FormationTimeline
+* DepthFogController
+* SchoolMotionRig
+* BloomTrailPass
+
+Use:
+
+* instanced meshes if possible
+* spline path interpolation
+* GPU-friendly animation math
+* shared materials
+* efficient render loops
+
+====================================================
+ANTI-SLOP RULES
+
+DO NOT:
+
+* use random flocking libraries directly
+* use chaotic boids behavior
+* create fish chaos
+* over-animate everything
+* spam particles
+* use excessive bloom
+* create “screensaver energy”
+
+This is:
+restrained cinematic choreography.
+
+====================================================
+EMOTIONAL TARGET
+
+The scene should feel like:
+a sacred underwater ritual assembling around the koi.
+
+The audience should experience:
+
+* awe
+* immersion
+* elegance
+* mystery
+* calm tension
+
+NOT:
+
+* visual noise
+* chaos
+* generic 3D animation demo
+
+====================================================
+FINAL EXPERIENCE
+
+The school of guppies should feel like:
+luxury motion design transformed into living marine choreography.
+
+The audience should forget they are watching:
+“a webpage animation”
+
+and instead feel like:
+they briefly witnessed an intelligent underwater ecosystem responding to their presence.
